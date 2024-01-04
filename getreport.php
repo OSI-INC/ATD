@@ -20,6 +20,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+session_start();
+
 // Including the autoloader config file in the directory level above
 // that acts as an SQL database query function.
 // Loading all QBO service objects needed to generate the report
