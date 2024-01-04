@@ -1,6 +1,6 @@
 README
 
-This set of code can be used to obtain the General Ledger (gl) report,
+Accounting Transaction Download (ATD) can be used to obtain the General Ledger (gl) report,
 with class IDs included in every transaction. The gl report is
 essentially a list of all transactions, but the class IDs for each
 transaction are not included with the report. The quickbooks example
@@ -15,7 +15,7 @@ modified, which is used by the php server to connect to quickbooks
 and execute the report on your account. 
 
 
-Prior to connecting QBI to your Quickbooks company, you must configure
+Prior to connecting ATD to your Quickbooks company, you must configure
 your code and register the app on Quickbooks.
 
 
@@ -41,21 +41,21 @@ the app is approved in the "Keys and Credentials" tab. This contains
 the ClientID, the Client Secret, and the Redirect URI. The Client ID
 and Client Secret are private keys that identify your app and enable
 you to connect to your company. The client ID is the public ID of the
-app and the Client Secret is private identification string. The QBI
+app and the Client Secret is private identification string. The ATD
 code requires all three parameters to be accurate. The Redirect URI
 is the location that Quickbooks redirects your web browser to after
 connecting successfully with the app. The redirect URI listed here
 should match your redirect in the code.
 
 Accessing production keys: Until the app is approved by quickbooks,
-you will only be able to access your sandbox company with QBI
+you will only be able to access your sandbox company with ATD
 under "Development". To start the approval process, navigate the to
 the keys and credentials tab of your "Production Settings" and
 complete the required tasks. Once these are completed you will have
 access to the necessary keys for your real company.
 
 
-QBI Configuration
+ATD Configuration
 
 NOTE: This code does not use any external package managers, like
 composer. If you want to use composer, change the include
@@ -69,7 +69,7 @@ necessary for each piece of code.
 The following information is needed to configure your app:
 
 1) Redirect URI: Found in the Quickbooks app settings. This must be
-set in the qbiconfig file. Copy paste your redirect URI in the single
+set in the atdconfig file. Copy paste your redirect URI in the single
 quotation marks that follow this string in the obi config
 file: 'oauth_redirect_uri' => Your redirect should be a web address
 that contains your uri.php file, which acts as a temporary bridge
@@ -81,7 +81,7 @@ separate the client from the server, see below.
 
 2) Callback URI: This URI is user-dependent. It must be set in the
 uri.php file. It redirects the web browser to send a GET request to
-the PHP server to execute the callback procedure in QBI, which
+the PHP server to execute the callback procedure in ATD which
 obtains the access code for the company. Insert the URI like this,
 where the uri is between the single quotation marks : $b
 = 'http://<ip address>:<port>/callback.php?>' The current URI is set
@@ -100,7 +100,7 @@ server locally, and connect on your webserver locally.
 2) baseURL: Determines the type of company the app is accessing. To
 access a sandbox company, the string is "development". To access a
 production company, the string is "production". Include either string
-in your qbiconfig file like this: 'baseUrl' => "production" 
+in your atdconfig file like this: 'baseUrl' => "production" 
 
 Once the app has been approved, and you have configured your settings
 as described above, you are ready to connect with your company.
@@ -111,7 +111,7 @@ Flow of steps for connection:
 1) Install php, version 8.3 or greater.
 
 2) Listen on PHP Server: Open a locally hosted php server in your
-terminal within the QBI directory, using php -S <your ip
+terminal within the ATD directory, using php -S <your ip
 address>:<port to listen on>(ex: php -S 192.168.1.186:3000)
 
 3) In your web browser, open a socket to this server by navigating to
@@ -130,16 +130,16 @@ bring the web server back to the index page.
 
 8) Download generated reports. 
 
-Separating client from server: QBI is set up to host the PHP server
+Separating client from server: ATD is set up to host the PHP server
 locally, and connect locally. If you want to host your PHP server on
 another machine, you must change the following URIs: Callback URI,
-Home URI, and the redirect URI. The qbi_redirect file is currently
+Home URI, and the redirect URI. The atd_redirect file is currently
 hosted online at the OSI website. This redirect file will always
 redirect the server to the local host, in order to host the php
-server on another machine do this: Alter the example qbi_redirect
-code in QBI to change the callback URI to your new IP address instead
-of localhost. Find a website to host your qbi_redirect code- the
+server on another machine do this: Alter the example atd_redirect
+code in ATD to change the callback URI to your new IP address instead
+of localhost. Find a website to host your atd_redirect code- the
 address of the code is the new redirect URI. Copy paste this address
-into your app settings online, and into the qbi_config file. Then,
-change your Home URI in your qbi_config file to reflect the new IP
+into your app settings online, and into the atd_config file. Then,
+change your Home URI in your atd_config file to reflect the new IP
 address.

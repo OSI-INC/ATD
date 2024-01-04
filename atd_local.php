@@ -1,8 +1,8 @@
 
 <?php 
 /*
-qbi_local.php is the local URI redirect file hosted on the OSI page, which will
-redirect the client server to the QBI server's callback procedure.
+atd_local.php is the local URI redirect file hosted on the OSI page, which will
+redirect the client server to the ATD server's callback procedure.
 
 Copyright (C) 2023,  Haley Hashemi, Open Source Instruments, Inc.
 Copyright (C) 2016,  Intuit, Inc.
@@ -31,7 +31,7 @@ $b = 'http://localhost:3000/callback.php?';
 // included after the question mark
 $c = $b.$a;
 
-// Save the client server address and the QBI server address
+// Save the client server address and the ATD server address
 $clientIP = $_SERVER['REMOTE_ADDR'];
 $redirect = $_SERVER['PHP_SELF'];
 

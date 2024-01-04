@@ -34,9 +34,9 @@ use QuickBooksOnline\API\ReportService\ReportName;
 
 function getclass(){
 
-   $qbiconfig = include('qbiconfig.php');
+   $atdconfig = include('atdconfig.php');
 
-	//Loading the contents of the qbiconfig file to create a service
+	//Loading the contents of the atdconfig file to create a service
 	//object. We will set the uri and scope to have the same value
 	//that they do in the config2 file. We also set the client ID and
 	//secret to their session variable values. The baseUrl is
@@ -46,8 +46,8 @@ function getclass(){
 		'auth_mode' => 'oauth2',
 		'ClientID'=> $_SESSION['clientId'],
 		'ClientSecret' => $_SESSION['clientS'],
-		'RedirectURI' => $qbiconfig['oauth_redirect_uri'],
-		'scope' => $qbiconfig['oauth_scope'],
+		'RedirectURI' => $atdconfig['oauth_redirect_uri'],
+		'scope' => $atdconfig['oauth_scope'],
 		'baseUrl' => "production" 
 	));
 

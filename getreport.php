@@ -39,13 +39,13 @@ use QuickBooksOnline\API\ReportService\ReportName;
 function Report()
 {
 	// Load contents of API config
-	$qbiconfig = include('qbiconfig.php');
+	$atdconfig = include('atdconfig.php');
 	$dataService = DataService::Configure(array(
 		'auth_mode' => 'oauth2',
 		'ClientID'=> $_SESSION['clientId'],
 		'ClientSecret' => $_SESSION['clientS'],
-		'RedirectURI' => $qbiconfig['oauth_redirect_uri'],
-		'scope' => $qbiconfig['oauth_scope'],
+		'RedirectURI' => $atdconfig['oauth_redirect_uri'],
+		'scope' => $atdconfig['oauth_scope'],
 		'baseUrl' => "production"
 	));
 
@@ -128,9 +128,9 @@ function Report()
 	    $_SESSION['GLreport'] = $GLreport;
 	}
 
-	// Redirect the web server to the index page set in qbiconfig
+	// Redirect the web server to the index page set in atdconfig
 	// using the header function
-	$homeURI = $qbiconfig['homeURI'];
+	$homeURI = $atdconfig['homeURI'];
 	header("location: " . $homeURI);
 }
 Report();

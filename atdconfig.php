@@ -1,7 +1,7 @@
 <?php
 
 /*
-qbiconfig.php saves configuration settings in an array.
+atdconfig.php saves configuration settings in an array.
 
 Copyright (C) 2023,  Haley Hashemi, Open Source Instruments, Inc.
 Copyright (C) 2016,  Intuit, Inc.
@@ -31,7 +31,7 @@ return array(
 	// The redirect should match the redirect uri in your production
 	// settings. Use a redirect uri that is a web server executable
 	// php script. 
-    'oauth_redirect_uri' => 'https://opensourceinstruments.com/HTML/Redirect/qbi_local.php',
+    'oauth_redirect_uri' => 'https://opensourceinstruments.com/HTML/Redirect/atd_local.php',
 	// The baseURL is production or development depending on your app
 	// settings.
 	'baseUrl' => "production", 'homeURI' => 'http://localhost:3000' )

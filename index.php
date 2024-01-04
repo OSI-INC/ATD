@@ -1,6 +1,6 @@
 <?php
 /*
-index.php is the "home page" for QBI where you can submit Client ID and
+index.php is the "home page" for ATD where you can submit Client ID and
 secret, connect to Quickbooks, set report settings and download
 reports. 
 

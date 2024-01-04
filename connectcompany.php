@@ -25,16 +25,16 @@ session_start();
 include('QBO/src/config.php');
 use QuickBooksOnline\API\DataService\DataService;
 
-// QBI config values will be loaded
-$qbiconfig = include('qbiconfig.php');
+// ATD config values will be loaded
+$atdconfig = include('atdconfig.php');
 
 // Create the service object with credentials
 $dataService = DataService::Configure(array(
     'auth_mode' => 'oauth2',
    	'ClientID'=> $_SESSION['clientId'],
     'ClientSecret' => $_SESSION['clientS'],
-    'RedirectURI' => $qbiconfig['oauth_redirect_uri'],
-    'scope' => $qbiconfig['oauth_scope'],
+    'RedirectURI' => $atdconfig['oauth_redirect_uri'],
+    'scope' => $atdconfig['oauth_scope'],
     'baseUrl' => "production"
 ));
 

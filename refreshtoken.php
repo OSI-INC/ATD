@@ -27,8 +27,8 @@ use QuickBooksOnline\API\DataService\DataService;
 
 function refreshToken()
 {
-	// Load QBI config values and access token
-	$qbiconfig = include('qbiconfig.php');
+	// Load ATD config values and access token
+	$atdconfig = include('atdconfig.php');
 	$accessToken = $_SESSION['sessionAccessToken'];
 
 	// Create data service object with credentials
@@ -36,8 +36,8 @@ function refreshToken()
 		'auth_mode' => 'oauth2',
 		'ClientID'=> $_SESSION['clientId'],
 		'ClientSecret' => $_SESSION['clientS'],
-		'RedirectURI' => $qbiconfig['oauth_redirect_uri'],
-		'baseUrl' => $qbiconfig['baseUrl'],
+		'RedirectURI' => $atdconfig['oauth_redirect_uri'],
+		'baseUrl' => $atdconfig['baseUrl'],
 		'refreshTokenKey' => $accessToken->getRefreshToken(),
 ));
 
