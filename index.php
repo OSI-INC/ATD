@@ -76,7 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$_SESSION['start'] = $start;
 		}
 		$end = $_POST['end'];
-		echo($end);
 		if (empty($end)) {
 			print "No End Date selected";
 		} else {
