@@ -80,36 +80,30 @@ necessary for each piece of code.
 
 The following information is needed to configure ATD:
 
-1) Redirect URI: Found in Keys and Credentials. This must be set in
-the atdconfig file. Copy paste your redirect URI in the single
-quotation marks that follow this string in the obi config
-file: 'oauth_redirect_uri' => Your redirect should be a web address
-that contains a redirect file that extracts the tokens from the log
-in process, and then redirects the ATD client to the ATD server. This
+1) Redirect URI: This must be set in the atdconfig file and in your
+Production keys and credentials. Your redirect should be a web
+address that contains code that extracts the tokens from the log-in
+process, and then redirects the ATD client to the ATD server. This
 must match the URI listed in your Production (or development)
 settings. The current URI is set so that you can host the php server
-locally, and connect on your webserver locally. To create your own
-redirect URI website, you can use the  atd_uri files as a template,
-then upload to the file to a website of your choosing: the file's web
-address would be the redirect URI to use. If you want to separate the
-client from the server, scrolldown.
+locally, and connect on your webserver locally. To use this current
+URI, navigate to the atdconfig file, and copy paste the redirect uri
+listed there into your redirect URI tab in the Production Keys and
+Credentials page. To create your ownredirect URI website, you can use
+the  atd_uri files as a template, then upload to the file to a
+website of your choosing: the file's web address would be the
+redirect URI to use. If you want to separate the client from the
+server, scrolldown.
 
 2) Callback URI: This URI can be user-dependent. It must be set in the
-atd_uri.php files. It redirects the web browser to send a GET request
-to the PHP server to execute the callback procedure in ATD which
-obtains the access code for the company. Insert the URI like this,
-where the uri is between the single quotation marks : $b
-= 'http://<ip address>:<port>/callback.php?>' The current URI is set
-so that you can host the php server locally, and connect on your
-webserver locally.
+atd_uri.php files. It redirects the ATD client to the ATD server to execute the callback procedure which
+obtains the access code for the company. The current URI is set
+so that you can host the ATD server locally, and connect as a client locally. Instructions on how to separate the ATD client from the ATD server are at the end of this file.
 
-3) Home URI: This URI can be user dependent, and is the same as the
-callback URI with no call to a php file.  Copy paste your Home URI in
-the single quotation marks that follow this string in the obi config
-file: 'homeURI' => 'http://<ip address>:<port>' The Home URI is used
-at the end of the callback procedure to redirect the web server to
-the home page.The current URI is set so that you can host the php
-server locally, and connect on your webserver locally.
+3) Home URI: This URI can be user dependent, and it must be set in the atd_uri.php file. It is the same as the
+callback URI with no call to a php file.  The Home URI is used
+at the end of the callback and report procedures to redirect the ATD client to
+the home page. he current URI is set so that you can host the ATD server locally, and connect as a client locally. Instructions on how to separate the ATD client from the ATD server are at the end of this file.
 
 
 4) baseURL: Determines the type of company the app is accessing. To
@@ -124,8 +118,8 @@ Flow of steps for ATD connection:
 1) Install php, version 8.3 or greater.
 
 2) Listen on PHP Server: Open a locally hosted php server in your
-terminal within the ATD directory, using php -S <your ip
-address>:<port to listen on>(ex: php -S 192.168.1.186:3000)
+terminal at the top of the ATD directory, using php -S <your ip
+address OR localhost>:<port to listen on>(ex: php -S localhosti wo:3000)
 
 3) In your web browser, open a socket to this server by navigating to
 <your ip address>:<port>
@@ -133,7 +127,7 @@ address>:<port to listen on>(ex: php -S 192.168.1.186:3000)
 4) Submit your client ID and client Secret. You can access these in
 your Development or Production settings of your app on Quickbooks.
 
-5) Click Oath2 log in button, and log into your account, selecting the
+5) Click Connect Company button, and log into your account, selecting the
 company you'd like to access. Your redirect URI will bring the web
 server back to the index page.
 

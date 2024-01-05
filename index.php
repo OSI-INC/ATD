@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		 Client S <input type="password" style = "width: 375px;"name="clientS"/>
 	    <input type="submit" id="submit1" name="submit1" required>
 	</form>
-	 <p><a href="connectcompany.php">Connect App to Quickbooks</a></p>
+	 <p><a href="connectcompany.php">Connect to Company</a></p>
 
 	<style>
    		h2 {
@@ -140,6 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	</form>
 	<p><a href="getclasses.php"> Generate Report </a></p>
+	<p><a href="refreshtoken.php"> Refresh token </a></p>
 	<p><a href="downloadclass.php"> Download Class Reports </a></p>
 	<p><a href="downloadall.php"> Download Full Report</a></p>
  

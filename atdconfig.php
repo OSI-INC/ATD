@@ -34,5 +34,7 @@ return array(
     'oauth_redirect_uri' => 'https://opensourceinstruments.com/HTML/Redirect/atd_local.php',
 	// The baseURL is production or development depending on your app
 	// settings.
-	'baseUrl' => "production", 'homeURI' => 'http://localhost:3000' )
+	'baseUrl' => "production", 
+	'homeURI' => 'http://localhost:3000' 
+)
 ?>

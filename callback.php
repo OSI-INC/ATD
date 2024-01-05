@@ -55,6 +55,7 @@ function processCallbackCode()
 	// Redirects us to the inital index.html page, make sure the IP address
 	// below is the same ip address as the computer as the one hosting the
 	// php server.
+
 	$homeURI = $atdconfig['homeURI'];
 	header("location: " . $homeURI);
 }

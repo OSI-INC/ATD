@@ -46,13 +46,13 @@ function getclass(){
 		'auth_mode' => 'oauth2',
 		'ClientID'=> $_SESSION['clientId'],
 		'ClientSecret' => $_SESSION['clientS'],
-		'RedirectURI' => $atdconfig['oauth_redirect_uri'],
 		'scope' => $atdconfig['oauth_scope'],
-		'baseUrl' => "production" 
+		'baseUrl' => "production",
+		'accessTokenKey' = $_SESSION['sessionAccessToken']
 	));
 
     // 	Retrieve or update the session access token, and update the oath2
-    // 	token if necessary. 
+    // 	token if necessary.
    $accessToken = $_SESSION['sessionAccessToken'];
 	$dataService->updateOAuth2Token($accessToken);
 
@@ -99,7 +99,7 @@ function getclass(){
 
 	// For every ID extracted, select the corresponding name and
 	// combine the two into a new element into a new array.
-	for ($i = 0; $i < count($idmatchlist); $i++) { 
+	for ($i = 0; $i < count($idmatchlist); $i++) {
 		array_push($matchlist, $namematchlist[$i] . ' : ' . $idmatchlist[$i]);
 	}
 
