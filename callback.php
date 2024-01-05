@@ -33,7 +33,7 @@ use QuickBooksOnline\API\DataService\DataService;
 function processCallbackCode()
 {
 
-	// Loading the contents of the atd config file to create a data
+	// Loading the contents of the qbi config file to create a data
 	// service object
     $atdconfig = include('atdconfig.php');
     $dataService = DataService::Configure(array(
@@ -42,7 +42,7 @@ function processCallbackCode()
     	'ClientSecret' => $_SESSION['clientS'],
         'RedirectURI' => $atdconfig['oauth_redirect_uri'],
         'scope' => $atdconfig['oauth_scope'],
-        'baseUrl'=> $atdconfig['baseUrl'],
+        'baseUrl'=> $atdconfig['baseUrl']
     ));
 	
     $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
@@ -55,9 +55,9 @@ function processCallbackCode()
 	// Redirects us to the inital index.html page, make sure the IP address
 	// below is the same ip address as the computer as the one hosting the
 	// php server.
-
 	$homeURI = $atdconfig['homeURI'];
-	header("location: " . $homeURI);
+	print_r($accessToken);
+
 }
 
 processCallbackCode();

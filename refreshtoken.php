@@ -29,15 +29,15 @@ function refreshToken()
 {
 	// Load ATD config values and access token
 	$atdconfig = include('atdconfig.php');
-
+	$accessToken = $_SESSION['sessionAccessToken'];
 	// Create data service object with credentials
 	$dataService = DataService::Configure(array(
 		'auth_mode' => 'oauth2',
 		'ClientID'=> $_SESSION['clientId'],
 		'ClientSecret' => $_SESSION['clientS'],
 		'RedirectURI' => $atdconfig['oauth_redirect_uri'],
-		'baseUrl' => $atdconfig['baseUrl'],
-		'refreshTokenKey' => $accessToken->getRefreshToken(),
+		'baseUrl' => $atdconfig['baseUrl']
+
 	
 ));
 
@@ -45,12 +45,7 @@ function refreshToken()
     $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
     $refreshedAccessTokenObj = $OAuth2LoginHelper->refreshToken();
     $dataService->updateOAuth2Token($refreshedAccessTokenObj);
-	
-	
-	// Refresh session access token
     $_SESSION['sessionAccessToken'] = $refreshedAccessTokenObj;
-    print_r($refreshedAccessTokenObj);
-    return $refreshedAccessTokenObj;
 }
 
 $result = refreshToken();

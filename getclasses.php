@@ -19,10 +19,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-session_start();
 
-// Including the autoloader config file in the directory level above
-// that acts as an SQL database query function. Load service objects.
 include('QBO/src/config.php'); 
 use QuickBooksOnline\API\Core\ServiceContext;
 use QuickBooksOnline\API\DataService\DataService; 
@@ -31,6 +28,13 @@ use QuickBooksOnline\API\Core\Http\Serialization\XmlObjectSerializer;
 use QuickBooksOnline\API\QueryFilter\QueryMessage; 
 use QuickBooksOnline\API\ReportService\ReportService; 
 use QuickBooksOnline\API\ReportService\ReportName;
+
+session_start();
+
+// Including the autoloader config file in the directory level above
+// that acts as an SQL database query function. Load service objects.
+
+
 
 function getclass(){
 
@@ -42,19 +46,22 @@ function getclass(){
 	//secret to their session variable values. The baseUrl is
 	//production if you are in the production setting.
 
+	
    $dataService = DataService::Configure(array(
 		'auth_mode' => 'oauth2',
 		'ClientID'=> $_SESSION['clientId'],
 		'ClientSecret' => $_SESSION['clientS'],
+		'RedirectURI' => $atdconfig['oauth_redirect_uri'],
 		'scope' => $atdconfig['oauth_scope'],
-		'baseUrl' => "production",
-		'accessTokenKey' = $_SESSION['sessionAccessToken']
+		'baseUrl' => 'production'
 	));
 
     // 	Retrieve or update the session access token, and update the oath2
     // 	token if necessary.
-   $accessToken = $_SESSION['sessionAccessToken'];
+	$accessToken = $_SESSION['sessionAccessToken'];
 	$dataService->updateOAuth2Token($accessToken);
+	
+	
 
 	// Create an array that will contain the results of the query, the
 	// query parameters are set by a string that is passed to the

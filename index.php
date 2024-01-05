@@ -29,7 +29,6 @@ use QuickBooksOnline\API\DataService\DataService;
 
 session_start();
 
-//Check to see if the session access token has been set and print token info if set
 if (isset($_SESSION['sessionAccessToken'])) {
 
     $accessToken = $_SESSION['sessionAccessToken'];
@@ -37,9 +36,11 @@ if (isset($_SESSION['sessionAccessToken'])) {
         'access_token' => $accessToken->getAccessToken(),
         'refresh_token' => $accessToken->getRefreshToken(),
         'x_refresh_token_expires_in' => $accessToken->getRefreshTokenExpiresAt(),
-        'expires_in' => $accessToken->getAccessTokenExpiresAt()
+        'access expires_in' => $accessToken->getAccessTokenExpiresAt()
     );
 }
+
+//Check to see if the session access token has been set and print token info if set
 
 // If the client ID and Secret have been submitted, save the values in
 // the session variables. If the accounting method and date ranges
