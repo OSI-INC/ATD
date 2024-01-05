@@ -105,7 +105,8 @@ function Report()
 	}
 
 	$_SESSION['classreport'] = $merge;
-
+	$classInfo = $_SESSION['ClassInfo'];
+	array_push($merge, $classInfo);
 	// Execute the general ledger report again, this time for no
 	// specific class. This will retrieve all transactions for an
 	// allotted time period, but it will not return any class IDs for

@@ -20,8 +20,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 session_start();
-$all = $_SESSION['GLreport'];
-$filename = 'transactions.txt';
+$info = $_SESSION['GLreport'];
+$start = $_SESSION['start'];
+$end = $_SESSION['end'];
+$type = 'byTransaction.txt'
+$filename = $start.'_'.$end.'_'.$type;
 
 // Set the content type and disposition to indicate that the data
 // being sent to the browser is a binary file which will be
@@ -29,6 +32,6 @@ $filename = 'transactions.txt';
 // of the report to the file to download.
 header('Content-Type: application/octet-stream');
 header('Content-Disposition: attachment; filename=' .$filename);
-print_r($all);
+print_r($info);
 
 ?>

@@ -22,7 +22,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 session_start();
 $info = $_SESSION['classreport'];
-$filename = 'transactions.txt';
+$start = $_SESSION['start'];
+$end = $_SESSION['end'];
+$type = 'byClass.txt';
+$filename = $start.'_'.$end.'_'.$type;
 
 // Set the content type and disposition to indicate that the data
 // being sent to the browser is a binary file which will be

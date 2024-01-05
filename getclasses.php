@@ -112,10 +112,9 @@ function getclass(){
 
 	// Print the ID-Name list to the screen. Save the ID array in a
 	// session variable, which will be called when we generate our
-	// report.	
-	print_r($matchlist); 
+	// report.	 
 	$_SESSION['Ids'] = $idmatchlist;
-
+	$_SESSION['ClassInfo'] = $matchlist;
 	// Execute the report file
 	include('getreport.php');
 }

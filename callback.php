@@ -56,7 +56,7 @@ function processCallbackCode()
 	// below is the same ip address as the computer as the one hosting the
 	// php server.
 	$homeURI = $atdconfig['homeURI'];
-	print_r($accessToken);
+	header('location:'.$homeURI);
 
 }
 
