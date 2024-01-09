@@ -1,11 +1,24 @@
-README Accounting Transaction Download (ATD) sample can be used to
-obtain the General Ledger (gl) report, with class IDs included in
-every transaction. The gl report is essentially a list of all
-transactions, but the class IDs for each transaction are not included
-with the report. The quickbooks example code was modified slightly in
-order to execute the report on behalf of all classes individually.
-This method provides a list of all transactions in each specific
-class, with the class IDs in the header, with just one report step.
+Accounting Transaction Download (ATD) was developed to connect with a
+company that has an account with Quickbooks Online software, using
+the REST/API model in order to obtain a specific type of Transaction
+report. Quickbooks online allows integration of novel API “entities”
+or “Apps”  that can exchange and obtain information with a company’s
+online accounts using the HTTPs method. Though many company reports
+are available for download on the website, ATD returns and downloads
+a JSON list for all transactions in a specified time period with a
+class-specific organization option, or class-agnostic (as some
+transactions may not be assigned to a class. Companies that use
+quickbooks online will often assign each transaction to a
+specific “class”, yet the current API code provided by Quickbooks
+does not include the class ID number or name for transactions
+obtained using the General Ledger report function. This report
+returns a list of all transactions, but it lacks the class ID and
+number. Therefore, ATD was developed to retrieve the General Ledger
+report from each class, providing the client with transactions
+organized by class. Additionally, ATD can also retrieve a list of all
+transactions in a class-agnostic manner to account for transactions
+that have not been registered to a specific class yet. The Quickbooks
+example code has been modified in order to execute ATD.
 
 
 Prior to connecting ATD to your Quickbooks company, you must configure
