@@ -1,26 +1,30 @@
-
 <?php 
+
 /*
-qbi_186.php is the URI redirect file used if you want to separate the server
-from the client, hosted on the OSI page, which will redirect the
-client server to the QBI server's callback procedure.
 
-Copyright (C) 2023,  Haley Hashemi, Open Source Instruments, Inc.
-Copyright(C) 2016,  Intuit, Inc.
+atd_186.php 
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Redirects browser to local callback.php, passing the entire query string along
+with the new query. The redirect IP address is 192.168.1.186, port 3000. This
+local IP address should match the address of the ATD server on our local area
+network.
 
-This program is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License for more details.
+Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments, Inc.
+Copyright (C) 2024, Kevan Hashemi, Open Source Instruments, Inc.
+Copyright (C) 2016, Intuit, Inc.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see
-<https://www.gnu.org/licenses/>.
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <https://www.gnu.org/licenses/>.
+
 */
 
 session_start();
@@ -49,4 +53,5 @@ fclose($f);
 
 // Redirect web server to the callback uri
 header('location:'.$c);
+
 ?>

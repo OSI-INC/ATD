@@ -1,25 +1,28 @@
 <?php
 
 /*
-Callback.php exchanges the authorization code and realmID for an
-access token from quickbooks, and redirects the web server to main
-index page.
 
-Copyright (C) 2023,  Haley Hashemi, Open Source Instruments, Inc.
-Copyright (C) 2016,  Intuit, Inc.
+callback.php 
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Exchange authorization code and realmID for an access token from quickbooks.
+Redirect to main ATD page.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments, Inc.
+Copyright (C) 2024, Kevan Hashemi, Open Source Instruments, Inc.
+Copyright (C) 2016, Intuit, Inc.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <https://www.gnu.org/licenses/>.
+
 */
 session_start();
 
@@ -48,7 +51,7 @@ function processCallbackCode()
     $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
 
     // Update the tokens 
-    $accessToken = $OAuth2LoginHelper->exchangeAuthorizationCodeForToken($_GET['code'], $_GET['realmId']);
+    $accessToken = $OAuth2LoginHelper->exchangeAuthorizationCodeForToken($_GET['code'],$_GET['realmId']);
     $dataService->updateOAuth2Token($accessToken);
  	$_SESSION['sessionAccessToken'] = $accessToken;
 
