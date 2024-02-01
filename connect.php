@@ -2,7 +2,7 @@
 
 /*
 
-connectcompany.php 
+connect.php 
 
 Brings the user to the quickbooks log in page if the Client ID and Client secret
 for the app have been set. Quickbooks sends back the authorization code in the

@@ -121,7 +121,7 @@ itself -->
 	<p><input type="submit" name="submit_tokens" required/></p>
 </form>
 
-<p><a href="connectcompany.php">Connect to Company</a></p>
+<p><a href="connect.php">Connect to Company</a></p>
 
 <!-- Create a form with entry tables for the report settings. The form
 method is "post", and the action is to submit the passwords to the page

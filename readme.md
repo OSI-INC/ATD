@@ -112,8 +112,7 @@ to the IP address and port that we wpecify in config.php. You are welcome to
 use one of the two URIs we have on our own Open Source Instruments Inc. (OSI)
 secure server.
 
-https://www.opensourceinstruments.com/HTML/Redirect/atd_186.php
-
+https://www.opensourceinstruments.com/HTML/Redirect/atd_186.php\
 https://www.opensourceinstruments.com/HTML/Redirect/atd_local.php
 
 The default config.php uses the OSI atd_local.php. In the long run, we would
@@ -139,8 +138,7 @@ https://github.com/OSI-INC/ATD
 Start the ATD process on the ATD server by navigating to the ATD directory and
 entering one of the following commands in the terminal. 
 
-php -S localhost:3000 
-
+php -S localhost:3000\
 php -S 192.168.1.186:3000
 
 Here we instruct ATD to listen for a connection from the host computer on port
