@@ -1,38 +1,49 @@
 # Accounting Transaction Download
 
-Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments Inc.
-
+Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments Inc.\
 Copyright (C) 2024, Kevan Hashemi, Open Source Instruments Inc.
 
 ## Introduction
 
 The Accounting Transaction Download (ATD) program downloads all transactions in
 a specified date range from a Quickbooks Online (QBO) company account. The data
-file provided by ATD includes the company's general leger for the specified date
-range, as well as a separate leger for each QBO class defined in the company
+file provided by ATD includes the company's general ledger for the specified date
+range, as well as separate legers for each QBO class defined in the company
 account. Each leger contains all transactions, including journal entries. Any
-transaction that has been assigned a class will appear twice in the data file:
-once in the general leger and once in a class leger. To use ATD, we run the ATD
-program in a PHP server. We can set up the PHP server on our own computer or
-some other computer assigned for the purpose on our local area network. We
-connect to the PHP server with a web browser, and we interact with the ATD
-program through its browser interface. By means of this interface, we submit the
-credentials that permit ATD to access our QBO company account. ATD then directs
-us to the QBO log in, using the credentials. We log in to QBO to verify our
-assocation with our QBO company account, and we are redirected back to the ATD
-interface. We can then generate and download the report.
+transaction that has been assigned a class will appear twice: once in the
+general leger and once in a class leger.
+
+The ATD process is a web server and website. The web server is the Unix PHP
+utility, which start from a terminal. The website is a collection of pages that
+make heavy use of hyptertext preprocessing (PHP). The combination of server and
+pages is what we call the "ATD server". We communicate with ATD  by connecting
+to our ATD server with a web browser. So far as we can tell, any web browser
+will do. 
 
 ![ATD Process Schematic](Schematic.gif)
 
-The ATD application does not use any external package managers, like composer.
-If you want to use composer, change the include ('../config.php') at the top of
-each file to the composer autoload function. The include('../config.php') uses
-the autoloader config file that acts as an SQL database query function. This is
-a way of loading QBO's functions, classes, variables, etc, that are necessary
-for each piece of code. 
+The schematic above attempts to show the interactions that take place between
+our browser, the ATD server, the QBO server, and the non-QBO server that hosts
+the post-authentication redirect.
+
+Once we have connected to the ATD server, we enter two long-term access keys
+provided by Intuit to permit ATD to communicate with our QBO account. We
+instruct ATD to initiate a log-in to our QBO account. The ATD server redirects
+our browser to QBO, where we enter our log-in credentials. Once QBO is satisfied
+that we have identified ourselves, QBO redirects our browser to yet another web
+page hosted on a non-QBO server. Along with the redirect command, QBO provides
+the access token it has granted us following our successful log-in. The non-QBO
+server must provide a secure socket layer (SSL) and support PHP. The web page it
+hosts is what we call the "post-authentication" redirect.
+
+The post-authentication redirect takes our browser back to the ATD server, and
+in doing so provides our ATD server with the access token it needs to retrieve
+transactions from our QBO company. We can now instruct ATD to retrieve reports
+from QBO, and we can subsequently download these reports to our own hard driver
+with our web browser. 
 
 
-## Registration on QBO
+## Registration
 
 Prior to connecting ATD to your QBO company account, we must obtain our company
 credentials on QBO and configure the ATD code. We create an Intuit Developer
@@ -58,7 +69,7 @@ Before QBO will give us keys and credentials, we must pass through the QBO app
 approval process.
 
 
-## QBO Approval Process
+## Approval
 
 Click "Keys and Credentials" under the Production tab. A list of to-do items
 will pop up. These tasks include verifying email address and completing our
@@ -72,7 +83,7 @@ will be provided, and we will be permitted to enter a "Redirect URI", where
 "URI" stands for "universal resource identifier". More about the URI below.
 
 
-## Keys and Credentials
+## Credentials
 
 Once QBO ATD is approved, we have access to our credentials. This includes the
 Client ID, the Client Secret, and the Redirect URI. The Client ID and Client
@@ -83,7 +94,7 @@ server that QBO will load once we have used our own personal credentials to log
 in to the QBO server. We provide two examples of redirect resources: atd_186.php
 and atd_local.php. These are PHP files that we can host on a web server that
 provides a PHP hypertext preprocessor. When QBO requests the URI, it passes the
-security tokens, which it granted us during out login, along with its request. The
+access tokens, which it granted us during out login, along with its request. The
 redirect URI will extract these tokens, redirects our browser to the local machine
 that is running our ATD server, and provides the tokens to that server with the
 redirect request. The redirect URI listed in the Production Settings of the App
@@ -94,10 +105,10 @@ http link nor a local link within our own network.
 
 ## Configuration
 
-We configure ATD with atdconfig.php. In this file we specify our redirect URI
+We configure ATD with config.php. In this file we specify our redirect URI
 and the IP address and port two which we want our ATD process to listen for
 connections. We will interact with ATD using a web browser by opening a socket
-to the IP address and port that we wpecify in atdconfig.php. You are welcome to
+to the IP address and port that we wpecify in config.php. You are welcome to
 use one of the two URIs we have on our own Open Source Instruments Inc. (OSI)
 secure server.
 
@@ -105,20 +116,20 @@ https://www.opensourceinstruments.com/HTML/Redirect/atd_186.php
 
 https://www.opensourceinstruments.com/HTML/Redirect/atd_local.php
 
-The default atdconfig.php uses the OSI atd_local.php. In the long run, we would
+The default config.php uses the OSI atd_local.php. In the long run, we would
 prefer you to host your URI on your own securre server. When you use our URI, it
 is possible for us to extract and store your tokens on our own server, which we
 don't do, but the fact that it is in principle possible for us to store your
 tokens will most certainly violate your company's security protocols. So don't
 use our URI any more than you must.
 
-We set the homeURL in atdconfig.php. By default this is "localhost:3000". We set
-the baseURL in atdconfig.php. This determines the type of company the app is
+We set the homeURL in config.php. By default this is "localhost:3000". We set
+the baseURL in config.php. This determines the type of company the app is
 accessing. To access a sandbox company, the string is "development". To access a
 production company, the string is "production". 
 
 
-## Install and Run
+## Installation
 
 Install php on the ATD server machine, version 8.3 or greater. Clone the ATD 
 repository, specifying the repository with the following GitHub link.
@@ -149,7 +160,23 @@ ATD index page. Fill out report settings and submit them to ATD. Click "Generate
 Report" and wait about 20 seconds. Download generated reports. 
 
 
-## Separate Client and Server
+## Security
+
+The ATD program never alters anything in our QBO company. Its only function is
+to download accounting information from the company.
+
+The ATD process keeps its access keys and tokens in a block of memory reserved
+for our current ATD session. It never writes the keys or tokens to disk. There
+is no place where we can enter default values for the keys or tokens in the ATD
+code. We can instruct our web browser to remember the access keys, so that it is
+easy for us to enter them when we start each ATD session. The access keys last
+for several months, but eventually we have to renew them by visiting the Intuit
+developer website. The access token we obtain after our log-in will last so long
+as our session is active, but will be obtained only after we log into QBO using
+its full authentication process.
+
+
+## Comments
 
 The ATD application is currently configured so that the server and client are
 both local. The redirect files that are hosted on the OSI website are atd_local.php
@@ -160,3 +187,12 @@ another IP address, we must first identify the server's IP address. Use this IP
 address for the Callback URI in your redirect file, and for the Home URI in the
 callback and report files. The redirect file itself must be also be hosted on a
 website, and the address of file will be our new redirect URI.
+
+The ATD application does not use an external package manager. If you want to use
+the Composer package manager, change the include ('../config.php') at the top of
+each file to the composer autoload function. The include ('../config.php') uses
+the autoloader config file that acts as an SQL database query function. This is
+a way of loading QBO's functions, classes, variables, etc, that are necessary
+for each piece of code. 
+
+

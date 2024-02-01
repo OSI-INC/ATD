@@ -2,7 +2,7 @@
 
 /*
 
-atdconfig.php 
+config.php 
 
 Generate an array of configuration parameters and returns it to the calling PHP
 process.

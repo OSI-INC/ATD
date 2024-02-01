@@ -26,15 +26,15 @@ this program.  If not, see <https://www.gnu.org/licenses/>.
 // Connect to our session array.
 session_start();
 
-// Including the autoloader config file in the directory level above
-// that acts as an SQL database query function.
+// Including the autoloader config file in the directory level above that acts
+// as an SQL database query function.
 include('QBO/src/config.php');
 use QuickBooksOnline\API\DataService\DataService;
 
 function refreshToken()
 {
 	// Load ATD config values and access token
-	$atdconfig = include('atdconfig.php');
+	$config = include('config.php');
 	$accessToken = $_SESSION['sessionAccessToken'];
 	
 	// Create data service object with credentials
@@ -42,11 +42,8 @@ function refreshToken()
 		'auth_mode' => 'oauth2',
 		'ClientID'=> $_SESSION['clientId'],
 		'ClientSecret' => $_SESSION['clientS'],
-		'RedirectURI' => $atdconfig['oauth_redirect_uri'],
-		'baseUrl' => $atdconfig['baseUrl']
-
-	
-));
+		'RedirectURI' => $config['oauth_redirect_uri'],
+		'baseUrl' => $config['baseUrl']));
 
    	// Update log in object with the data service
     $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();

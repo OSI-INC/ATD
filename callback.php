@@ -38,14 +38,14 @@ function processCallbackCode()
 
 	// Loading the contents of the qbi config file to create a data
 	// service object
-    $atdconfig = include('atdconfig.php');
+    $config = include('config.php');
     $dataService = DataService::Configure(array(
         'auth_mode' => 'oauth2',
         'ClientID'=> $_SESSION['clientId'],
     	'ClientSecret' => $_SESSION['clientS'],
-        'RedirectURI' => $atdconfig['oauth_redirect_uri'],
-        'scope' => $atdconfig['oauth_scope'],
-        'baseUrl'=> $atdconfig['baseUrl']
+        'RedirectURI' => $config['oauth_redirect_uri'],
+        'scope' => $config['oauth_scope'],
+        'baseUrl'=> $config['baseUrl']
     ));
 	
     $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
@@ -58,7 +58,7 @@ function processCallbackCode()
 	// Redirects us to the inital index.html page, make sure the IP address
 	// below is the same ip address as the computer as the one hosting the
 	// php server.
-	$homeURI = $atdconfig['homeURI'];
+	$homeURI = $config['homeURI'];
 	header('location:'.$homeURI);
 
 }

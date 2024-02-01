@@ -40,13 +40,13 @@ use QuickBooksOnline\API\ReportService\ReportName;
 session_start();
 
 // Load the contents of the ATD configuration file to create a service object.
-$atdconfig = include('atdconfig.php');
+$config = include('config.php');
 $dataService = DataService::Configure(array(
 	'auth_mode' => 'oauth2',
 	'ClientID'=> $_SESSION['clientId'],
 	'ClientSecret' => $_SESSION['clientS'],
-	'RedirectURI' => $atdconfig['oauth_redirect_uri'],
-	'scope' => $atdconfig['oauth_scope'],
+	'RedirectURI' => $config['oauth_redirect_uri'],
+	'scope' => $config['oauth_scope'],
 	'baseUrl' => 'production'
 ));
 
@@ -176,7 +176,7 @@ if (!$report) {
 }
 
 // Redirect the web server to the ATD main page.
-$homeURI = $atdconfig['homeURI'];
+$homeURI = $config['homeURI'];
 header("location: " . $homeURI);
 
 ?>
