@@ -6,19 +6,20 @@ Copyright (C) 2024, Kevan Hashemi, Open Source Instruments Inc.
 ## Introduction
 
 The Accounting Transaction Download (ATD) program downloads all transactions in
-a specified date range from a Quickbooks Online (QBO) company account. The data
-file provided by ATD includes the company's general ledger for the specified date
-range, as well as separate legers for each QBO class defined in the company
+a specified date range from a [Quickbooks
+Online](https://quickbooks.intuit.com/online/) (QBO) company account. The data
+file provided by ATD includes the company's general ledger for the specified
+date range, as well as separate legers for each QBO class defined in the company
 account. Each leger contains all transactions, including journal entries. Any
 transaction that has been assigned a class will appear twice: once in the
 general leger and once in a class leger.
 
-The ATD process is a web server and website. The web server is the Unix PHP
-utility, which start from a terminal. The website is a collection of pages that
-make heavy use of hyptertext preprocessing (PHP). The combination of server and
-pages is what we call the "ATD server". We communicate with ATD  by connecting
-to our ATD server with a web browser. So far as we can tell, any web browser
-will do. 
+The ATD process is a web server equipped with a suite of web pages. The web
+server is provided by [PHP](https://www.php.net). The website is a collection of
+pages that make heavy use of hyptertext preprocessing (PHP). The combination of
+server and pages is what we call the "ATD server". We communicate with ATD  by
+connecting to our ATD server with a web browser. So far as we can tell, any web
+browser will do. 
 
 ![ATD Process Schematic](Schematic.gif)
 
@@ -105,22 +106,14 @@ http link nor a local link within our own network.
 
 ## Configuration
 
-We configure ATD with config.php. In this file we specify our redirect URI
-and the IP address and port two which we want our ATD process to listen for
+We configure ATD with config.php. In this file we specify our redirect URI and
+the IP address and port two which we want our ATD process to listen for
 connections. We will interact with ATD using a web browser by opening a socket
-to the IP address and port that we wpecify in config.php. You are welcome to
-use one of the two URIs we have on our own Open Source Instruments Inc. (OSI)
-secure server.
+to the IP address and port that we wpecify in config.php. You are welcome to use
+the URI we provide on our own [Open Source Instruments
+Inc.](https://www.opensourceinstruments.com) (OSI) secure server.
 
-https://www.opensourceinstruments.com/HTML/Redirect/atd_186.php\
 https://www.opensourceinstruments.com/HTML/Redirect/atd_local.php
-
-The default config.php uses the OSI atd_local.php. In the long run, we would
-prefer you to host your URI on your own securre server. When you use our URI, it
-is possible for us to extract and store your tokens on our own server, which we
-don't do, but the fact that it is in principle possible for us to store your
-tokens will most certainly violate your company's security protocols. So don't
-use our URI any more than you must.
 
 We set the homeURL in config.php. By default this is "localhost:3000". We set
 the baseURL in config.php. This determines the type of company the app is
@@ -136,21 +129,15 @@ repository, specifying the repository with the following GitHub link.
 https://github.com/OSI-INC/ATD
 
 Start the ATD process on the ATD server by navigating to the ATD directory and
-entering one of the following commands in the terminal. 
+entering the following command in the terminal. 
 
-php -S localhost:3000\
-php -S 192.168.1.186:3000
+php -S localhost:3000
 
-Here we instruct ATD to listen for a connection from the host computer on port
-3000, or to listen for a connection to IP address 192.168.186 on port 3000, on
-the assumption that this computer is assigned IP address 192.168.1.186.
-
-In your web browser, open a socket to this server by navigating to ip:port.
-These could be "localhost:3000" for a "development" deployment of ATD, or
-"192.168.1.186:3000" for a "production" deployment. You should see the ATD main
-page open in your browser, inviting you to submit your client identifier and
-client secret. You can access these in your development or production settings
-of your app on QBO.
+Here we instruct ATD to listen for a connection from the computer hosting ATD on
+port 3000. In a browser on the host machine, type "localhost:3000" for the web
+addres. You should see the ATD main page open in your browser, inviting you to
+submit your client identifier and client secret. You can access these in your
+development or production settings of your app on QBO.
 
 Click Connect Company button, and log into your account, selecting the company
 you'd like to access. Your redirect URI will bring the web server back to the
@@ -159,6 +146,14 @@ Report" and wait about 20 seconds. Download generated reports.
 
 
 ## Security
+
+The default config.php uses the OSI atd_local.php. In the long run, we recommend
+you to host your redirect resource on your own securre server. When you use our
+redirect resource, it is in principle possible for us to extract and store your
+access token on our own server. The fact that this is possible most certainly
+violate your company's security protocols. Use our redirect resource to test
+your ATD server, but switch to using your own redirect, hosted on your own
+secure server, as soon as you can.
 
 The ATD program never alters anything in our QBO company. Its only function is
 to download accounting information from the company.
@@ -176,15 +171,26 @@ its full authentication process.
 
 ## Comments
 
-The ATD application is currently configured so that the server and client are
-both local. The redirect files that are hosted on the OSI website are atd_local.php
-and atd_186.php. If we want to host the PHP server on a LAN with the IP address
-listed in atd_186, we change the redirect URI, Callback URI and Home URI to
-reflect this address and redirect file. If we want to host the PHP server at
-another IP address, we must first identify the server's IP address. Use this IP
-address for the Callback URI in your redirect file, and for the Home URI in the
-callback and report files. The redirect file itself must be also be hosted on a
-website, and the address of file will be our new redirect URI.
+The ATD default configuration of ATD has the server and client running on the
+same computer. We connect to the ATD server with "localhost:3000" and we use the
+atd_local.php redirect resource on the OSI website. Another way to use ATD is to
+set up an ATD server in our local network and assign it a static local address.
+Suppose we assign our ATD server the local address 192.168.1.186. In config.php
+and in our Intuit Developer Dashboard, we enter the following address for our
+redirect resource:
+
+https://www.opensourceinstruments.com/HTML/Redirect/atd_186.php
+
+In config.php we set the HomeURI to:
+
+http://192.168.1.186:3000
+
+We launch ATD on the server with:
+
+php -S 192.168.1.186:3000
+
+Now you should be able to connect to the server from any local machine using web
+address "192.168.1.186:3000".
 
 The ATD application does not use an external package manager. If you want to use
 the Composer package manager, change the include ('../config.php') at the top of

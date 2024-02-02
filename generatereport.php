@@ -166,6 +166,10 @@ if (!$reportService) {
 $reportService->setStartDate($start);
 $reportService->setEndDate($end);
 $reportService->setAccountingMethod($method);
+// 01-FEB-24 We believe can use getColumns() to get a list of the columns
+// that will be provided in the general ledger. We have tested already
+// the use of setColumns("account_name,klass_name,create_date") to include
+// the class name. Note that it's really a K in klass_name.
 $report = $reportService->executeReport(ReportName::GENERALLEDGER);
 
 // Save the general ledger report in a session variable.
