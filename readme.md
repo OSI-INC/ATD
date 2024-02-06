@@ -156,7 +156,7 @@ account, along with the identifying numbers that QBO has assigned to each class.
 
 Each transaction in the ledger has the following columns, arranged in an order
 dictated by QBO, rather than by how we list them when we ask for them, or how 
-we list them here: 
+we list them here.
 
 | Name             | Description                         |
 |------------------|-------------------------------------|
@@ -166,10 +166,12 @@ we list them here:
 | klass_name       | class name                          |
 | name             | memo                                |
 | split_acc        | split account                       |
-| rbal_nat_amount  | don't know what this is             |
-| subt_nat_amount  | don't know what this is either      |
+| subt_nat_amount  | amount of this transaction          |
+| rbal_nat_amount  | balance after transaction           |
 
-
+If we want to add columns to the general ledger, we find the lines in the
+read_ledger.php script that call setColumns and add their names to the existing
+list.
 
 
 ## Security
