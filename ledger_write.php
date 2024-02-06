@@ -27,7 +27,7 @@ this program.  If not, see <https://www.gnu.org/licenses/>.
 
 // Connect to our session and compose a file name for the class report.
 session_start();
-$filename = $_SESSION['start'].'_'.$_SESSION['end'].'_All.txt';
+$filename = $_SESSION['start'].'_'.$_SESSION['end'].'.txt';
 
 // Set the content type and disposition to indicate that the data being sent to
 // the browser is a binary file which will be automatically downloaded. Set the
