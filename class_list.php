@@ -27,9 +27,30 @@ this program.  If not, see <https://www.gnu.org/licenses/>.
 // Connect to our session and compose a file name for the class report.
 session_start();
 
-// List the ledgers in HTML format.
-foreach ($_SESSION['ClassInfo'] as $cInfo) {
-	print_r($cInfo . '<br>');
-}
-
 ?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>ATD</title>
+</head>
+
+<body>
+
+<center>
+<h1>Class List</h1>
+</center>
+
+<center><table border cellspacing=2>
+<tr><th>Name</th><th>Identifier</th></tr>
+<?php
+	foreach ($_SESSION['ClassInfo'] as $cInfo) {
+		$temp = explode(':',$cInfo);
+		echo '<tr><td>' . $temp[0] . '</td><td>' . $temp[1] . '</td></tr>';
+	}
+?>
+</table></center>
+
+</body>
+</html>

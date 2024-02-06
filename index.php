@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 
 <head>
-	<title>Accounting Transaction Download (ATD)</title>
+	<title>ATD</title>
 </head>
 
 <body>
@@ -109,53 +109,93 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 &copy; 2024 Kevan Hashemi, Open Source Instruments Inc.<br>
 </center>
 
+
 <!-- Create a form with entry tables for the client ID and the client Secret.
 The form method is "post", and the action is to submit the passwords to the page
 itself -->
 
+<br><br><br>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-	<p>Identifier<input type="text" style="width:375px;" name="clientId"/></p>
-
-	<p>Secret<input type="password" style="width:375px;" name="clientS"/></p>
-
-	<p><input type="submit" name="submit_tokens" 
-		value="Submit Identifier and Secret" required/></p>
+	<table>
+		<tr>
+			<th>Identifier:</th>
+			<td><input type="text" size="50" name="clientId"/></td>
+		</tr>
+		<tr>
+			<th>Secret:</th>
+			<td><input type="password" size="50" name="clientS"/></td>
+		</tr>
+		<tr>
+			<th>Access:</th>
+			<td><?php
+			if (isset($accessTokenArray)) {
+				echo "Granted";
+			} else {
+				echo "Not Yet Granted";
+			} 
+			?></td>
+		</tr>
+	</table>
+	<input type="submit" 
+	name="submit_tokens" 
+	value="Submit Identifier and Secret" 
+	required />
 </form>
 
-<p><a href="connect.php">Connect to Company Account</a></p>
+<form action="connect.php" method="get">
+	<input type="submit" 
+	name="connect" 
+	value="Connect to Company Account" 
+	required />
+</form>
+
 
 <!-- Create a form with entry tables for the report settings. The form
 method is "post", and the action is to submit the passwords to the page
 itself -->
 
+<br>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-	<b>Method:</b> <input type="radio" name="cash" id="yescash" value="true" 
-		<?php if ($_SESSION['cash'] == 'true') echo 'checked'; ?>
-	/>Cash
-	<input type="radio" name="cash" id="nocash" value="false" 
-		<?php if ($_SESSION['cash'] != 'true') echo 'checked'; ?>
-	/>Accrual
-	<b>From:</b> <input type="text" name="start" value="<?php echo $_SESSION['start']; ?>" />
-	<b>To:</b> <input type="text" name="end" value="<?php echo $_SESSION['end']; ?>" />
-	<input type="submit" name="submit_dates"/>
+	<table>
+	<tr>
+		<th>Accounting:</th>
+		<td>
+			<input type="radio" 
+			name="cash" 
+			id="yescash" 
+			value="true" 
+			<?php if ($_SESSION['cash'] == 'true') echo 'checked'; ?> />Cash
+			<input type="radio" name="cash" id="nocash" value="false" 
+				<?php if ($_SESSION['cash'] != 'true') echo 'checked'; ?> />Accrual
+		</td>
+	</tr>
+	<tr>
+		<th>Start Date:</th>
+		<td>
+			<input type="text" name="start" value="<?php echo $_SESSION['start']; ?>" />
+		</td>
+	</tr>
+		<th>End Date:</th>
+		<td>
+			<input type="text" name="end" value="<?php echo $_SESSION['end']; ?>" />
+		</td>
+	</tr>
+	</table>
+	<input type="submit" value="Submit Ledger Options" name="submit_dates" />
 </form>
 
 <!-- Each button below triggers the execution of a piece of PHP code. -->
 
-<p><a href="ledger_read.php">Read Ledger</a></p>
-<p><a href="ledger_write.php">Write Ledger</a></p>
-<p><a href="class_list.php">List Classes</a></p>
-
-<!-- Declare whether or not an access token has been granted. -->
-<p><b>Access Token:</b>
-<?php
-	if (isset($accessTokenArray)) {
-		echo "Granted";
-	} else {
-		echo "None Yet";
-	} 
-?>
-</p>
+<br>
+<form action="ledger_read.php">
+	<input type="submit" value="Read Ledger" name="ledger_read" />
+</form>
+<form action="ledger_write.php">
+	<input type="submit" value="Write Ledger" name="ledger_write" />
+</form>
+<form action="class_list.php">
+	<input type="submit" value="List Classes" name="class_list" />
+</form>
 
 </body>
 </html>

@@ -141,24 +141,28 @@ php -S localhost:3000
 
 Here we instruct ATD to listen for a connection from the computer hosting ATD on
 port 3000. In a browser on the host machine, type "localhost:3000" for the web
-addres. You should see the ATD main page open in your browser, inviting you to
-submit your client identifier and client secret. You can access these in your
-development or production settings of your app on QBO. Copy and paste them into
-the two entry boxes. Your browser will save them to its memory if you permit it
-to do so.
+addres. We should see the ATD main page open in our browser, inviting us to
+submit our client identifier and secret. We can access these in our development
+or production settings of our app on QBO. Copy and paste them into the two entry
+boxes. Our browser will save them to its memory if we permit it to do so. Click
+"Submit Identifier and Secret" and ATD will store these two strings of
+characters in its session memory.
 
-Click "Connect to Company Account" and log into your company's QBO account,
-selecting the company you'd like to access from a list. The interface will
-present you with a list of available applications as well. You should see "ATD"
-in this list, but we do not find it necessary to select ATD from the list before
-proceeding. At this point, your redirect URI will bring the web server back to
-the ATD maini page. Select Cash or Accrual, specify start and end dates, and
-click "Submit".
+Click "Connect to Company Account" and ATD takes us to QBO, where we can log
+into our company's QBO account. If our QBO username is associated with more than
+one company account, QBO will ask us to select the company we would like to
+access. Once we have selected a company, QBO will present us with a list of
+available applications as well. We should see "ATD" among them, but we do not
+find it necessary to select ATD from the list before proceeding. We complete our
+log-in. Our post-authorization URI should bring our browser back to the ATD main
+page.
 
-Press "Read Ledger" to have ATD fetch the ledger from your company account.
-Press "write ledger" to write the ledger to your hard drive as a text file.
-Press "List Classes" to get a list of the classes that are defined in your QBO
-account, along with the identifying numbers that QBO has assigned to each class.
+Specify ledger options: cash or accrual, start date, and end date. Press "Submit
+Ledger Options". Now we can press "Read Ledger" and ATD will connect to our QBO
+company and read the ledger we have specified from the company account. We press
+"write ledger" to write the ledger to our hard drive as a text file. We press
+"List Classes" to get a list of classes defined in our QBO account, along with
+the identifying numbers that QBO has assigned to each class.
 
 Each transaction in the ledger has the following columns, arranged in an order
 dictated by QBO, rather than by how we list them when we ask for them, or how 
@@ -182,16 +186,23 @@ our additional columns to that call.
 
 ## Security
 
-The default config.php uses the OSI atd_local.php. In the long run, we recommend
-you to host your redirect resource on your own securre server. When you use our
-redirect resource, it is in principle possible for us to extract and store your
-access token on our own server. The fact that this is possible most certainly
-violate your company's security protocols. Use our redirect resource to test
-your ATD server, but switch to using your own redirect, hosted on your own
-secure server, as soon as you can.
+The ATD program never alters anything in the QBO company it reads from. Its only
+function is to download accounting information from the company. Nevertheless,
+the access tokens ATD obtains from QBO could, in principle, be used by a
+malicious third party to read and alter your company accounts. It is important,
+therefore, that you take steps to prevent any malicious actor from obtaining
+your tokens.
 
-The ATD program never alters anything in our QBO company. Its only function is
-to download accounting information from the company.
+In its default configuration, ATD uses atd_local.php on the OSI secure server
+for its post-authorization redirect. Once you have ATD up and running, we ask
+you to host your own redirect file on your own secure server. You can copy
+atd_local.php right to your server if you like. Our redirect files keep a log of
+who is using them. It would be easy for us extract and store your access token
+on our own server as well. The fact that this is possible is a grievous security
+risk to your company. Use our redirect resource to test your ATD server, but
+switch to using your own redirect, hosted on your own secure server, as soon as
+you can. We provide no guarantee whatsoever that our web server is secure enough
+to prevent hackers from altering our redirect files and stealing your tokens. 
 
 The ATD process keeps its access keys and tokens in a block of memory reserved
 for our current ATD session. It never writes the keys or tokens to disk. There
