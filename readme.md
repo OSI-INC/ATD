@@ -72,16 +72,22 @@ approval process.
 
 ## Approval
 
-Click "Keys and Credentials" under the Production tab. A list of to-do items
-will pop up. These tasks include verifying email address and completing our
-profile. For the terms of service links, use the ATD license link and the
-github.com domain name. We will not be distributing this APP on the QBO store,
-so the URLs that allow a user to connect or disconnect can be a link to the
-GitHub repository. We categorize the app as "Accounting". We complete the app
-assessment questionnaire. Once we are done, QBO will either approve or reject
-the app. If the app is approved, our Production company keys and credentials
-will be provided, and we will be permitted to enter a "Redirect URI", where
-"URI" stands for "universal resource identifier". More about the URI below.
+Click "Keys and Credentials" under the Production tab. A list of taks will pop
+up. These tasks include verifying your email address and completing our profile.
+For the terms of service links, use the ATD license link and the github.com
+domain name. We will not be distributing this app on the QBO store. In place of
+the URLs that allow a user to connect or disconnect to the app, we use links to
+the GitHub repository. We categorize the app as "Accounting". When asked whether
+or not the app will store tokens, identifiers, or secrets to disk, we say No,
+because ATD stores no company information on disk. When asked what the app will
+be doing with the QBO company, we say that it reads reports only. It does not
+upload any information or alter the company records in any way. 
+
+Once we are done with all the pre-approval talks, we wait half an hour, after
+which QBO will either approve or reject the app. If the app is approved, our
+Production company keys and credentials will be provided, and we will be
+permitted to enter a "Redirect URI", where "URI" stands for "universal resource
+identifier". More about the URI below.
 
 
 ## Credentials
@@ -167,11 +173,11 @@ we list them here.
 | name             | memo                                |
 | split_acc        | split account                       |
 | subt_nat_amount  | amount of this transaction          |
-| rbal_nat_amount  | balance after transaction           |
+| rbal_nat_amount  | account balance after transaction   |
 
-If we want to add columns to the general ledger, we find the lines in the
-read_ledger.php script that call setColumns and add their names to the existing
-list.
+If we want to add columns to the general ledger, we find the line in
+read_ledger.php script that calls setColumns for the general ledger and we add
+our additional columns to that call.
 
 
 ## Security
@@ -219,7 +225,7 @@ We launch ATD on the server with:
 php -S 192.168.1.186:3000
 
 Now you should be able to connect to the server from any local machine using web
-address "192.168.1.186:3000".
+address 186 on the local subnet 192.168.1".
 
 The ATD application does not use an external package manager. If you want to use
 the Composer package manager, change the include ('../config.php') at the top of
