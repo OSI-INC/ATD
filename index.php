@@ -122,7 +122,7 @@ itself -->
 		value="Submit Identifier and Secret" required/></p>
 </form>
 
-<p><a href="connect.php">Connect to QBO Company Account</a></p>
+<p><a href="connect.php">Connect to Company Account</a></p>
 
 <!-- Create a form with entry tables for the report settings. The form
 method is "post", and the action is to submit the passwords to the page

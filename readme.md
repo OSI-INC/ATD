@@ -121,7 +121,7 @@ accessing. To access a sandbox company, the string is "development". To access a
 production company, the string is "production". 
 
 
-## Installation
+## Operation
 
 Install php on the ATD server machine, version 5.6 or greater. Clone the ATD 
 repository, specifying the repository with the following GitHub link.
@@ -137,12 +137,39 @@ Here we instruct ATD to listen for a connection from the computer hosting ATD on
 port 3000. In a browser on the host machine, type "localhost:3000" for the web
 addres. You should see the ATD main page open in your browser, inviting you to
 submit your client identifier and client secret. You can access these in your
-development or production settings of your app on QBO.
+development or production settings of your app on QBO. Copy and paste them into
+the two entry boxes. Your browser will save them to its memory if you permit it
+to do so.
 
-Click Connect Company button, and log into your account, selecting the company
-you'd like to access. Your redirect URI will bring the web server back to the
-ATD index page. Fill out report settings and submit them to ATD. Click "Generate
-Report" and wait about 20 seconds. Download generated reports. 
+Click "Connect to Company Account" and log into your company's QBO account,
+selecting the company you'd like to access from a list. The interface will
+present you with a list of available applications as well. You should see "ATD"
+in this list, but we do not find it necessary to select ATD from the list before
+proceeding. At this point, your redirect URI will bring the web server back to
+the ATD maini page. Select Cash or Accrual, specify start and end dates, and
+click "Submit".
+
+Press "Read Ledger" to have ATD fetch the ledger from your company account.
+Press "write ledger" to write the ledger to your hard drive as a text file.
+Press "List Classes" to get a list of the classes that are defined in your QBO
+account, along with the identifying numbers that QBO has assigned to each class.
+
+Each transaction in the ledger has the following columns, arranged in an order
+dictated by QBO, rather than by how we list them when we ask for them, or how 
+we list them here: 
+
+| Name             | Description                         |
+|------------------|-------------------------------------|
+| tx_date          | transaction date                    |
+| txn_type         | transaction type                    |
+| doc_num          | document number                     |
+| klass_name       | class name                          |
+| name             | memo                                |
+| split_acc        | split account                       |
+| rbal_nat_amount  | don't know what this is             |
+| subt_nat_amount  | don't know what this is either      |
+
+
 
 
 ## Security

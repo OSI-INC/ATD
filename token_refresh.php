@@ -6,6 +6,10 @@ token_refresh.php
 
 Generates a refresh token if the access token has expired.
 
+[06-FEB-24] Not quite sure what this file does. Could not get it to work
+when calling from main page. But leaving it in because Haley had it doing
+something useful. Maybe she will put it back in again. KSH
+
 Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments, Inc.
 Copyright (C) 2016, Intuit, Inc.
 
