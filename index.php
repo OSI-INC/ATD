@@ -118,10 +118,11 @@ itself -->
 
 	<p>Secret<input type="password" style="width:375px;" name="clientS"/></p>
 
-	<p><input type="submit" name="submit_tokens" required/></p>
+	<p><input type="submit" name="submit_tokens" 
+		value="Submit Identifier and Secret" required/></p>
 </form>
 
-<p><a href="connect.php">Connect to Company</a></p>
+<p><a href="connect.php">Connect to QBO Company Account</a></p>
 
 <!-- Create a form with entry tables for the report settings. The form
 method is "post", and the action is to submit the passwords to the page
@@ -141,10 +142,11 @@ itself -->
 
 <!-- Each button below triggers the execution of a piece of PHP code. -->
 
-<p><a href="generatereport.php">Generate Report</a></p>
-<p><a href="downloadclasses.php">Download Classes</a></p>
-<p><a href="downloadledger.php">Download Ledger</a></p>
+<p><a href="ledger_read.php">Read Ledger</a></p>
+<p><a href="ledger_write.php">Write Ledger</a></p>
+<p><a href="class_list.php">List Classes</a></p>
 
+<!-- Declare whether or not an access token has been granted. -->
 <p><b>Access Token:</b>
 <?php
 	if (isset($accessTokenArray)) {

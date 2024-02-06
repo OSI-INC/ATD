@@ -2,7 +2,7 @@
 
 /*
 
-refreshtoken.php 
+token_refresh.php 
 
 Generates a refresh token if the access token has expired.
 

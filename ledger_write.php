@@ -2,7 +2,7 @@
 
 /*
 
-downloadall.php 
+ledger_write.php 
 
 Returns the general ledger and writes to a text file on the browser machine's
 hard drive.

@@ -2,9 +2,9 @@
 
 /*
 
-downloadclass.php 
+class_list.php 
 
-Download the class-specific general ledger report to the client's computer.
+Print a list of classes to the browser.
 
 Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments, Inc.
 Copyright (C) 2024, Kevan Hashemi, Open Source Instruments, Inc.
@@ -26,15 +26,10 @@ this program.  If not, see <https://www.gnu.org/licenses/>.
 
 // Connect to our session and compose a file name for the class report.
 session_start();
-$filename = $_SESSION['start'].'_'.$_SESSION['end'].'_Class.txt';
 
-// Set the content type and disposition to indicate that the data
-// being sent to the browser is a binary file which will be
-// automatically downloaded. Set the file name. Output the contents
-// of the report to the file to download.
-header('Content-Type: application/octet-stream');
-header('Content-Disposition: attachment; filename='.$filename);
-print_r($_SESSION['ClassInfo']);
-print_r($_SESSION['ClassLedger']);
+// List the ledgers in HTML format.
+foreach ($_SESSION['ClassInfo'] as $cInfo) {
+	print_r($cInfo . '<br>');
+}
 
 ?>

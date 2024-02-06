@@ -123,7 +123,7 @@ production company, the string is "production".
 
 ## Installation
 
-Install php on the ATD server machine, version 8.3 or greater. Clone the ATD 
+Install php on the ATD server machine, version 5.6 or greater. Clone the ATD 
 repository, specifying the repository with the following GitHub link.
 
 https://github.com/OSI-INC/ATD
