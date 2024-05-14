@@ -45,10 +45,14 @@ session_start();
 <center><table border cellspacing=2>
 <tr><th>Name</th><th>Identifier</th></tr>
 <?php
-	foreach ($_SESSION['ClassInfo'] as $cInfo) {
-		$temp = explode(':',$cInfo);
-		echo '<tr><td>' . $temp[0] . '</td><td>' . $temp[1] . '</td></tr>';
-	}
+	if (isset($_SESSION['ClassInfo'])) {
+		foreach ($_SESSION['ClassInfo'] as $cInfo) {
+			$temp = explode(':',$cInfo);
+			echo '<tr><td>' . $temp[0] . '</td><td>' . $temp[1] . '</td></tr>';
+		}
+	} else {
+		echo 'This session has not yet received a class list.';
+	} 
 ?>
 </table></center>
 
