@@ -51,47 +51,6 @@ if (isset($_SESSION['sessionAccessToken'])) {
     );
 }
 
-// A post method is one that sends information into the session.
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-	// Handle posting of tokens.
-	if (isset($_POST["submit_tokens"])) {
-		$clientId = $_POST['clientId'];
-			if (empty($clientId)) {
-			print "clientId is empty";
-		} else {
-			$_SESSION['clientId'] = $clientId;
-		}
-		$clientS = $_POST['clientS'];
-		if (empty($clientS)) {
-			print "clientS is empty";
-		} else {
-			$_SESSION['clientS'] = $clientS;
-		}
-	  
-	// Handle posting of dates.  
-	} elseif (isset($_POST['submit_dates'])) {
-		$cash = $_POST['cash'];
-		if (empty($cash)) {
-			print "No accounting method selected";
-		} else {
-			$_SESSION['cash'] = $cash;
-		}
-		$start = $_POST['start'];
-		if (empty($start)) {
-			print "No Start Date selected";
-		} else {
-			$_SESSION['start'] = $start;
-		}
-		$end = $_POST['end'];
-		if (empty($end)) {
-			print "No End Date selected";
-		} else {
-			$_SESSION['end'] = $end;
-		}
-	}
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -109,6 +68,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 &copy; 2024 Kevan Hashemi, Open Source Instruments Inc.<br>
 </center>
 
+<?php
+
+// A post method is one that sends information into the session.
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+	// Handle posting of tokens.
+	if (isset($_POST['submit_tokens'])) {
+		$clientId = $_POST['clientId'];
+			if (empty($clientId)) {
+			print "<b>ERROR:</b> clientId is empty.<br>";
+		} else {
+			$_SESSION['clientId'] = $clientId;
+		}
+		$clientS = $_POST['clientS'];
+		if (empty($clientS)) {
+			print "<b>ERROR:</b> clientS is empty.<br>";
+		} else {
+			$_SESSION['clientS'] = $clientS;
+		}
+	  
+	// Handle posting of dates.  
+	} elseif (isset($_POST['submit_dates'])) {
+		$cash = $_POST['cash'];
+		if (empty($cash)) {
+			print "<b>ERROR:</b> No accounting method selected.<br>";
+		} else {
+			$_SESSION['cash'] = $cash;
+		}
+		$start = $_POST['start'];
+		if (empty($start)) {
+			print "<b>ERROR:</b> No Start Date selected.<br>";
+		} else {
+			$_SESSION['start'] = $start;
+		}
+		$end = $_POST['end'];
+		if (empty($end)) {
+			print "<b>ERROR:</b> No End Date selected.<br>";
+		} else {
+			$_SESSION['end'] = $end;
+		}
+	}
+}
+
+?>
 
 <!-- Create a form with entry tables for the client ID and the client Secret.
 The form method is "post", and the action is to submit the passwords to the page
