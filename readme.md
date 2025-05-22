@@ -1,6 +1,6 @@
 # Accounting Transaction Download
 
-Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments Inc.\
+Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments Inc.  
 Copyright (C) 2024, Kevan Hashemi, Open Source Instruments Inc.
 
 ## Introduction
