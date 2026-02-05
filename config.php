@@ -46,7 +46,8 @@ return array(
     	'https://www.opensourceinstruments.com/api/ATD/atd_osi.php',
     
 	// The baseURL is production or development depending on your app
-	// settings.
+	// settings. Use something like http://localhost:3000 for the homeURI
+	// if you want to host ATD on your own machine.
 	'baseUrl' => "production", 
 	'homeURI' => 'https://www.opensourceinstruments.com/api/ATD' 
 )

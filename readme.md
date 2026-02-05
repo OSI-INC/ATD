@@ -3,6 +3,7 @@
 Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments Inc.  
 Copyright (C) 2024-2026, Kevan Hashemi, Open Source Instruments Inc.
 
+
 ## Introduction
 
 The Accounting Transaction Download (ATD) program downloads all transactions in
@@ -17,23 +18,24 @@ general leger and once in a class leger.
 The ATD process is a suit of [PHP](https://www.php.net) pages hosted on a web
 server. The combination of the PHP server and PHP pages is what we call the "ATD
 server". We communicate with the ATD server by connecting to it with any web
-browser.
+browser. You will find an ATD server hosted by Open Source Instruments
+[here](https://www.opensourceinstruments.com/api/ATD). The schematic below
+illustrates the interactions that take place between our browser, the ATD
+server, the QBO server, and another server that hosts a post-authentication
+redirect. This post-authentication redirect could be hosted on the same server
+as the ATD files, and indeed that is the case with our OSI-hosted ATD server.
 
 ![ATD Process Schematic](Schematic.gif)
 
-The schematic above attempts to show the interactions that take place between
-our browser, the ATD server, the QBO server, and the non-QBO server that hosts
-a post-authentication redirect.
-
-Once we have connected to the ATD server, we enter two long-term access keys
-provided by Intuit to permit ATD to communicate with our QBO account. We
-instruct ATD to initiate a log-in to our QBO account. The ATD server redirects
-our browser to QBO, where we enter our log-in credentials. Once QBO is satisfied
-that we have identified ourselves, QBO redirects our browser to yet another web
-page hosted on a non-QBO server. Along with the redirect command, QBO provides
-the access token it has granted us following our successful log-in. The non-QBO
-server must provide a secure socket layer (SSL) and support PHP. The web page it
-hosts is what we call the "post-authentication" redirect.
+Once we have connected to the ATD server, we enter two access keys provided by
+Intuit to permit ATD to communicate with our QBO account. We instruct ATD to
+initiate a log-in to our QBO account. The ATD server redirects our browser to
+QBO, where we enter our log-in credentials. Once QBO is satisfied that we have
+identified ourselves, QBO redirects our browser to yet another web page hosted
+on a non-QBO server. Along with the redirect command, QBO provides the access
+token it has granted us following our successful log-in. The non-QBO server must
+provide a secure socket layer (SSL) and support PHP. The web page it hosts is
+what we call the "post-authentication" redirect.
 
 The post-authentication redirect takes our browser back to the ATD server, and
 in doing so provides our ATD server with the access token it needs to retrieve
@@ -111,24 +113,29 @@ http link nor a local link within our own network.
 ## Configuration
 
 We configure ATD with config.php. In this file we specify our redirect URI and
-the IP address and port two which we want our ATD process to listen for
+the IP address and port at which we want our ATD process to listen for
 connections. We will interact with ATD using a web browser by opening a socket
 to the IP address and port that we specify in config.php. You are welcome to use
-the URI we provide on our own [Open Source Instruments
-Inc.](https://www.opensourceinstruments.com) (OSI) secure server.
+the URI we provide one our own [Open Source Instruments
+Inc.](https://www.opensourceinstruments.com) (OSI) secure server. There are three
+to choose from:
 
-https://www.opensourceinstruments.com/HTML/Redirect/atd_local.php
+https://www.opensourceinstruments.com/api/ATD/atd_local.php
+https://www.opensourceinstruments.com/api/ATD/atd_osi.php
+https://www.opensourceinstruments.com/api/ATD/atd_186.php
 
-We set the homeURL in config.php. By default this is "localhost:3000". We set
-the baseURL in config.php. This determines the type of company the app is
-accessing. To access a sandbox company, the string is "development". To access a
-production company, the string is "production". 
+By default, the ATD code is set up to use the atd_osi redirect. We set the
+homeURL in config.php. By default this is set to point to our OSI-hosted ATD
+server. But you can point it to "localhost:3000" or "http://192.168.1.186:3000"
+if you want to run the server on your own machine, or on your local subnet. Here
+we are using "192.168.1.186" as an example of a local subnet address. We set the
+baseURL in config.php. This determines the type of company the app is accessing.
+To access a sandbox company, the string must be "development". To access a
+production company, the string must be "production". 
 
-
-## Operation
-
-Install php on the ATD server machine, version 5.6 or greater. Clone the ATD 
-repository, specifying the repository with the following GitHub link.
+To set up your own ATD server, install PHP on your server machine. You will need
+version 5.6 or greater. Clone the ATD repository, specifying the repository with
+the following GitHub link.
 
 https://github.com/OSI-INC/ATD
 
@@ -140,13 +147,18 @@ php -S localhost:3000
 Here we instruct ATD to listen for a connection from the computer hosting ATD on
 port 3000. In a browser on the host machine, type "localhost:3000" for the web
 addres. We should see the ATD main page open in our browser, inviting us to
-submit our client identifier and secret. We can access these in our development
-or production settings of our app on QBO. Copy and paste them into the two entry
-boxes. Our browser will save them to its memory if we permit it to do so. Click
-"Submit Identifier and Secret" and ATD will store these two strings of
-characters in its session memory.
+submit our client identifier and secret. We obtain these character strings from
+within the development or production settings of our application in QBO. Copy
+and paste them into the two entry boxes. Our browser will save them to its
+memory if we permit it to do so. Click "Submit Identifier and Secret" and ATD
+will store these two strings of characters in its session memory.
 
-Click "Connect to Company Account" and ATD takes us to QBO, where we can log
+
+## Operation
+
+Open the ATD home page by pointing your browser at the ATD root directory. The
+browser will open the index.php file automatically. In the page that opens,
+click "Connect to Company Account" and ATD takes us to QBO, where we can log
 into our company's QBO account. If our QBO username is associated with more than
 one company account, QBO will ask us to select the company we would like to
 access. Once we have selected a company, QBO will present us with a list of
