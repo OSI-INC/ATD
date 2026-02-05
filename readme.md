@@ -124,14 +124,22 @@ https://www.opensourceinstruments.com/api/ATD/atd_local.php
 https://www.opensourceinstruments.com/api/ATD/atd_osi.php
 https://www.opensourceinstruments.com/api/ATD/atd_186.php
 
-By default, the ATD code is set up to use the atd_osi redirect. We set the
-homeURL in config.php. By default this is set to point to our OSI-hosted ATD
-server. But you can point it to "localhost:3000" or "http://192.168.1.186:3000"
-if you want to run the server on your own machine, or on your local subnet. Here
-we are using "192.168.1.186" as an example of a local subnet address. We set the
-baseURL in config.php. This determines the type of company the app is accessing.
-To access a sandbox company, the string must be "development". To access a
-production company, the string must be "production". 
+By default, the ATD code is set up to use the atd_osi redirect. If you want to
+set up on your own machine, hosting ATD with your own PHP server, use the atd_local
+redirect. If you have your ATD server on local area network address 192.168.1.186, 
+use the atd_186 redirect. 
+
+We set the ATD server homeURL in config.php. By default this is set to point to
+our OSI-hosted ATD server, but you can point it to "localhost:3000" or
+"http://192.168.1.186:3000" if you want to run the server on your own machine,
+or on local address 192.168.1.186. In both cases, we are assuming the PHP server
+should listen on port 3000, but you could choose any port, or leave the port
+blank, and the browser will choose port 80. We are using "192.168.1.186" as an
+example of a local subnet address. We set the baseURL in config.php. This
+determines the type of company the app is accessing. Our ATD is an established
+API that interacts with a real QBO company account, so its baseURL is
+"production". When we were developing ATD, we practiced on a sandbox company
+hosted by Intuit, and for that we set the baseURL to "development".
 
 To set up your own ATD server, install PHP on your server machine. You will need
 version 5.6 or greater. Clone the ATD repository, specifying the repository with
@@ -146,7 +154,7 @@ php -S localhost:3000
 
 Here we instruct ATD to listen for a connection from the computer hosting ATD on
 port 3000. In a browser on the host machine, type "localhost:3000" for the web
-addres. We should see the ATD main page open in our browser, inviting us to
+address. We should see the ATD main page open in our browser, inviting us to
 submit our client identifier and secret. We obtain these character strings from
 within the development or production settings of our application in QBO. Copy
 and paste them into the two entry boxes. Our browser will save them to its
