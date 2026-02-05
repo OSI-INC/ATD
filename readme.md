@@ -1,7 +1,7 @@
 # Accounting Transaction Download
 
 Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments Inc.  
-Copyright (C) 2024, Kevan Hashemi, Open Source Instruments Inc.
+Copyright (C) 2024-2026, Kevan Hashemi, Open Source Instruments Inc.
 
 ## Introduction
 
@@ -14,18 +14,16 @@ account. Each leger contains all transactions, including journal entries. Any
 transaction that has been assigned a class will appear twice: once in the
 general leger and once in a class leger.
 
-The ATD process is a web server equipped with a suite of web pages. The web
-server is provided by [PHP](https://www.php.net). The website is a collection of
-pages that make heavy use of hyptertext preprocessing (PHP). The combination of
-server and pages is what we call the "ATD server". We communicate with ATD  by
-connecting to our ATD server with a web browser. So far as we can tell, any web
-browser will do. 
+The ATD process is a suit of [PHP](https://www.php.net) pages hosted on a web
+server. The combination of the PHP server and PHP pages is what we call the "ATD
+server". We communicate with the ATD server by connecting to it with any web
+browser.
 
 ![ATD Process Schematic](Schematic.gif)
 
 The schematic above attempts to show the interactions that take place between
 our browser, the ATD server, the QBO server, and the non-QBO server that hosts
-the post-authentication redirect.
+a post-authentication redirect.
 
 Once we have connected to the ATD server, we enter two long-term access keys
 provided by Intuit to permit ATD to communicate with our QBO account. We
@@ -115,7 +113,7 @@ http link nor a local link within our own network.
 We configure ATD with config.php. In this file we specify our redirect URI and
 the IP address and port two which we want our ATD process to listen for
 connections. We will interact with ATD using a web browser by opening a socket
-to the IP address and port that we wpecify in config.php. You are welcome to use
+to the IP address and port that we specify in config.php. You are welcome to use
 the URI we provide on our own [Open Source Instruments
 Inc.](https://www.opensourceinstruments.com) (OSI) secure server.
 

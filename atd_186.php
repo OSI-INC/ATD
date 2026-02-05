@@ -1,30 +1,29 @@
 <?php 
 
 /*
+	This pages redirects to file "callback.php" on a local area network server.
+	In the code below, we assume the local host is at local network address
+	192.168.1.186 and is accepting connections on port 3000. The redirect
+	extracts the original URL query string and attaches this to the local host
+	address to create a complet localhost URL with query string that will be
+	loaded by the client's browser, thus accessing a local file on the client
+	and passing the query string into the file.
 
-atd_186.php 
+	Copyright (C) 2023, Haley Hashemi, Open Source Instruments, Inc. 
+	Copyright (C) 2025, Kevan Hashemi, Open Source Instruments, Inc.
 
-Redirects browser to local callback.php, passing the entire query string along
-with the new query. The redirect IP address is 192.168.1.186, port 3000. This
-local IP address should match the address of the ATD server on our local area
-network.
+	This program is free software: you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by the Free
+	Software Foundation, either version 3 of the License, or (at your option)
+	any later version.
 
-Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments, Inc.
-Copyright (C) 2024, Kevan Hashemi, Open Source Instruments, Inc.
-Copyright (C) 2016, Intuit, Inc.
+	This program is distributed in the hope that it will be useful, but WITHOUT
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+	more details.
 
-This program is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with
-this program.  If not, see <https://www.gnu.org/licenses/>.
-
+	You should have received a copy of the GNU General Public License along with
+	this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 session_start();
@@ -36,20 +35,6 @@ $b = 'http://192.168.1.186:3000/callback.php?';
 // Set the redirect location to the index page with the access code
 // included after the question mark
 $c = $b.$a;
-
-// Save the client server address and the QBI server address
-$clientIP = $_SERVER['REMOTE_ADDR'];
-$redirect = $_SERVER['PHP_SELF'];
-
-// Save the unix time
-$t = time();
-
-// Create a new string for the data to be added
-$data = $t . ' ' . $clientIP . ' ' . $redirect;
-$fn = "log.txt";
-$f = fopen($fn, "a");
-fwrite($f, $data);
-fclose($f);
 
 // Redirect web server to the callback uri
 header('location:'.$c);

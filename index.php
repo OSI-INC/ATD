@@ -2,13 +2,11 @@
 
 /*
 
-index.php 
-
 The ATD home page. We load this page from a browser, and through it we control
 the ATD process.
 
 Copyright (C) 2023-2024, Haley Hashemi, Open Source Instruments, Inc.
-Copyright (C) 2024, Kevan Hashemi, Open Source Instruments, Inc.
+Copyright (C) 2024-20-25, Kevan Hashemi, Open Source Instruments, Inc.
 Copyright (C) 2016, Intuit, Inc.
 
 This program is free software: you can redistribute it and/or modify it under
@@ -66,7 +64,7 @@ if (isset($_SESSION['sessionAccessToken'])) {
 <center>
 <h1>Accounting Transaction Download (ATD)</h1>
 &copy; 2023-2024 Haley Hashemi, Open Source Instruments Inc.<br>
-&copy; 2024 Kevan Hashemi, Open Source Instruments Inc.<br>
+&copy; 2024-2025 Kevan Hashemi, Open Source Instruments Inc.<br>
 </center>
 
 <?php
